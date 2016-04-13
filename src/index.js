@@ -9,7 +9,7 @@ class Popover extends React.Component {
     children: React.PropTypes.node,
     around: React.PropTypes.node.isRequired,
     open: React.PropTypes.bool.isRequired,
-    preferPosition: React.PropTypes.object
+    position: React.PropTypes.object
   }
 
   constructor () {
@@ -102,7 +102,9 @@ class Popover extends React.Component {
     const rect = this.getAnchorBounds()
     const body = this.getBodySize()
 
-    const position = this.props.preferPosition || { x: 'left', y: 'bottom' }
+    if (this.props.position) return this.props.position
+
+    const position = { x: 'left', y: 'bottom' }
 
     if (rect.bottom + body.height >= docbounds.bottom) {
       position.y = 'top'

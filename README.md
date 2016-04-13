@@ -49,9 +49,9 @@ The content of the popover.
 
 The React component against which the popover is positioned.
 
-#### preferPosition (`{ y: 'top'|'bottom'|'center', x: 'left'|'right'|'center' }`)
+#### position (`{ y: 'top'|'bottom'|'center', x: 'left'|'right'|'center' }`)
 
-The preferred position of the popover.
+Manually set the position of the popover.
 
 ### Styling
 

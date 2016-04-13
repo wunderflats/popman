@@ -42,25 +42,25 @@ class Example extends React.Component {
       <div>
         <h1>Popover</h1>
         <h2>top left</h2>
-        <ClickButton preferPosition={{ y: 'top', x: 'left' }} />
+        <ClickButton position={{ y: 'top', x: 'left' }} />
         <h2>top right</h2>
-        <ClickButton preferPosition={{ y: 'top', x: 'right' }} />
+        <ClickButton position={{ y: 'top', x: 'right' }} />
         <h2>top center</h2>
-        <ClickButton preferPosition={{ y: 'top', x: 'center' }} />
+        <ClickButton position={{ y: 'top', x: 'center' }} />
 
         <h2>bottom left</h2>
-        <ClickButton preferPosition={{ y: 'bottom', x: 'left' }} />
+        <ClickButton position={{ y: 'bottom', x: 'left' }} />
         <h2>bottom right</h2>
-        <ClickButton preferPosition={{ y: 'bottom', x: 'right' }} />
+        <ClickButton position={{ y: 'bottom', x: 'right' }} />
         <h2>bottom center</h2>
-        <ClickButton preferPosition={{ y: 'bottom', x: 'center' }} />
+        <ClickButton position={{ y: 'bottom', x: 'center' }} />
 
         <h2>center left</h2>
-        <ClickButton preferPosition={{ y: 'center', x: 'left' }} />
+        <ClickButton position={{ y: 'center', x: 'left' }} />
         <h2>center right</h2>
-        <ClickButton preferPosition={{ y: 'center', x: 'right' }} />
+        <ClickButton position={{ y: 'center', x: 'right' }} />
         <h2>center center</h2>
-        <ClickButton preferPosition={{ y: 'center', x: 'center' }} />
+        <ClickButton position={{ y: 'center', x: 'center' }} />
       </div>
     )
   }
