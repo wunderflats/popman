@@ -1,5 +1,5 @@
 {
-  "name": "@wunderflats/react-popover",
+  "name": "popman",
   "version": "0.0.1",
   "description": "Popover component for React",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wunderflats/react-popover.git"
+    "url": "git+https://github.com/wunderflats/popman.git"
   },
   "keywords": [
     "react",
@@ -19,14 +19,15 @@
     "react-popover",
     "component",
     "react",
-    "component"
+    "component",
+    "popman"
   ],
   "author": "Wunderflats GmbH",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wunderflats/react-popover/issues"
+    "url": "https://github.com/wunderflats/popman/issues"
   },
-  "homepage": "https://github.com/wunderflats/react-popover#readme",
+  "homepage": "https://github.com/wunderflats/popman#readme",
   "peerDependencies": {
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
