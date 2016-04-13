@@ -129,6 +129,10 @@ class Popover extends React.Component {
 
     if (position.y === 'bottom') {
       values.top = bounds.bottom
+    } else if (position.y === 'center') {
+      const anchorHeight = bounds.bottom - bounds.top
+      const anchorCenter = bounds.top + anchorHeight / 2
+      values.top = anchorCenter - body.height / 2
     } else {
       values.top = bounds.top - body.height
     }

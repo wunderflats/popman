@@ -172,6 +172,10 @@ var Popover = function (_React$Component) {
 
       if (position.y === 'bottom') {
         values.top = bounds.bottom;
+      } else if (position.y === 'center') {
+        var anchorHeight = bounds.bottom - bounds.top;
+        var anchorCenter = bounds.top + anchorHeight / 2;
+        values.top = anchorCenter - body.height / 2;
       } else {
         values.top = bounds.top - body.height;
       }
@@ -180,8 +184,8 @@ var Popover = function (_React$Component) {
         values.left = bounds.left;
       } else if (position.x === 'center') {
         var anchorWidth = bounds.right - bounds.left;
-        var anchorCenter = bounds.left + anchorWidth / 2;
-        values.left = anchorCenter - body.width / 2;
+        var _anchorCenter = bounds.left + anchorWidth / 2;
+        values.left = _anchorCenter - body.width / 2;
       } else {
         values.left = bounds.right - body.width;
       }
@@ -347,6 +351,12 @@ var Example = function (_React$Component2) {
         React.createElement(
           'h2',
           null,
+          'top center'
+        ),
+        React.createElement(ClickButton, { preferPosition: { y: 'top', x: 'center' } }),
+        React.createElement(
+          'h2',
+          null,
           'bottom left'
         ),
         React.createElement(ClickButton, { preferPosition: { y: 'bottom', x: 'left' } }),
@@ -355,7 +365,31 @@ var Example = function (_React$Component2) {
           null,
           'bottom right'
         ),
-        React.createElement(ClickButton, { preferPosition: { y: 'bottom', x: 'right' } })
+        React.createElement(ClickButton, { preferPosition: { y: 'bottom', x: 'right' } }),
+        React.createElement(
+          'h2',
+          null,
+          'bottom center'
+        ),
+        React.createElement(ClickButton, { preferPosition: { y: 'bottom', x: 'center' } }),
+        React.createElement(
+          'h2',
+          null,
+          'center left'
+        ),
+        React.createElement(ClickButton, { preferPosition: { y: 'center', x: 'left' } }),
+        React.createElement(
+          'h2',
+          null,
+          'center right'
+        ),
+        React.createElement(ClickButton, { preferPosition: { y: 'center', x: 'right' } }),
+        React.createElement(
+          'h2',
+          null,
+          'center center'
+        ),
+        React.createElement(ClickButton, { preferPosition: { y: 'center', x: 'center' } })
       );
     }
   }]);

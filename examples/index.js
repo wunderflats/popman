@@ -45,10 +45,22 @@ class Example extends React.Component {
         <ClickButton preferPosition={{ y: 'top', x: 'left' }} />
         <h2>top right</h2>
         <ClickButton preferPosition={{ y: 'top', x: 'right' }} />
+        <h2>top center</h2>
+        <ClickButton preferPosition={{ y: 'top', x: 'center' }} />
+
         <h2>bottom left</h2>
         <ClickButton preferPosition={{ y: 'bottom', x: 'left' }} />
         <h2>bottom right</h2>
         <ClickButton preferPosition={{ y: 'bottom', x: 'right' }} />
+        <h2>bottom center</h2>
+        <ClickButton preferPosition={{ y: 'bottom', x: 'center' }} />
+
+        <h2>center left</h2>
+        <ClickButton preferPosition={{ y: 'center', x: 'left' }} />
+        <h2>center right</h2>
+        <ClickButton preferPosition={{ y: 'center', x: 'right' }} />
+        <h2>center center</h2>
+        <ClickButton preferPosition={{ y: 'center', x: 'center' }} />
       </div>
     )
   }
