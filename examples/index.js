@@ -1,0 +1,57 @@
+'use strict'
+
+const React = require('react')
+const ReactDOM = require('react-dom')
+const Popover = require('../dist')
+
+class ClickButton extends React.Component {
+  static propTypes = {
+    preferPosition: React.PropTypes.object.isRequired
+  }
+
+  constructor () {
+    super()
+    this.state = { open: false }
+    this.toggle = this.toggle.bind(this)
+  }
+
+  toggle () {
+    this.setState({ open: !this.state.open })
+  }
+
+  render () {
+    const { open } = this.state
+
+    const body = (
+      <button onClick={this.toggle}>
+        {open ? 'hide' : 'show'}
+      </button>
+    )
+
+    return (
+      <Popover {...this.props} open={open} around={body}>
+        <span>hello mr. popover</span>
+      </Popover>
+    )
+  }
+}
+
+class Example extends React.Component {
+  render () {
+    return (
+      <div>
+        <h1>Popover</h1>
+        <h2>top left</h2>
+        <ClickButton preferPosition={{ y: 'top', x: 'left' }} />
+        <h2>top right</h2>
+        <ClickButton preferPosition={{ y: 'top', x: 'right' }} />
+        <h2>bottom left</h2>
+        <ClickButton preferPosition={{ y: 'bottom', x: 'left' }} />
+        <h2>bottom right</h2>
+        <ClickButton preferPosition={{ y: 'bottom', x: 'right' }} />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<Example />, document.querySelector('#root'))
