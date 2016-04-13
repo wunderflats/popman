@@ -52,3 +52,25 @@ The React component against which the popover is positioned.
 #### preferPosition (`{ y: 'top'|'bottom', x: 'left'|'right' }`)
 
 The preferred position of the popover.
+
+### Styling
+
+To give your popovers padding, a white background and a box shadow. Also give some spacing to the anchor element (`margin`).
+
+```css
+.Popover {
+  padding: .25rem .5rem;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .2);
+  background: white;
+}
+
+.Popover--position-bottom-left,
+.Popover--position-bottom-right {
+  margin-top: .25rem;
+}
+
+.Popover--position-top-left,
+.Popover--position-top-right {
+  margin-top: -.25rem;
+}
+```
