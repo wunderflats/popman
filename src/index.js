@@ -33,8 +33,7 @@ class Popover extends React.Component {
     this._detachedContainer.style.position = 'absolute'
     this._detachedContainer.style.top = 0
     this._detachedContainer.style.left = 0
-    this._detachedContainer.className = 'Popover' +
-      (this.props.className ? ' ' + this.props.className : '')
+    this._detachedContainer.className = this.props.className || 'Popover'
     document.body.appendChild(this.popover)
     document.body.appendChild(this._detachedContainer)
     this._renderPopover()
@@ -214,10 +213,10 @@ class Popover extends React.Component {
     this.anchor = ReactDOM.findDOMNode(this)
     const position = this.calculatePosition(this.anchor)
     const style = this.calculateStyle(position)
+    const baseClassName = this.props.className || 'Popover'
 
-    const className = 'Popover' +
-      (' Popover--position-' + position.y + '-' + position.x) +
-      (this.props.className ? ' ' + this.props.className : '')
+    const className = baseClassName +
+      (' ' + baseClassName + '--position-' + position.y + '-' + position.x)
 
     if (!this.props.open) {
       ReactDOM.render((

@@ -61,7 +61,7 @@ var Popover = function (_React$Component) {
       this._detachedContainer.style.position = 'absolute';
       this._detachedContainer.style.top = 0;
       this._detachedContainer.style.left = 0;
-      this._detachedContainer.className = 'Popover' + (this.props.className ? ' ' + this.props.className : '');
+      this._detachedContainer.className = this.props.className || 'Popover';
       document.body.appendChild(this.popover);
       document.body.appendChild(this._detachedContainer);
       this._renderPopover();
@@ -261,8 +261,9 @@ var Popover = function (_React$Component) {
       this.anchor = ReactDOM.findDOMNode(this);
       var position = this.calculatePosition(this.anchor);
       var style = this.calculateStyle(position);
+      var baseClassName = this.props.className || 'Popover';
 
-      var className = 'Popover' + (' Popover--position-' + position.y + '-' + position.x) + (this.props.className ? ' ' + this.props.className : '');
+      var className = baseClassName + (' ' + baseClassName + '--position-' + position.y + '-' + position.x);
 
       if (!this.props.open) {
         ReactDOM.render(React.createElement('div', { style: { display: 'none' }, className: className }), this.popover);
