@@ -1,6 +1,6 @@
 # popman example
 
-[Online demo](https://github.com/wunderflats/popman/tree/master/examples). To build and view:
+[View in browser](https://cdn.rawgit.com/wunderflats/popman/master/examples/index.html). To build and view:
 
 ```
 git clone https://github.com/wunderflats/popman.git
