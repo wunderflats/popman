@@ -6,7 +6,7 @@ const Popover = require('../dist')
 
 class ClickButton extends React.Component {
   static propTypes = {
-    preferPosition: React.PropTypes.object.isRequired
+    preferPosition: React.PropTypes.object
   }
 
   constructor () {
@@ -61,6 +61,40 @@ class Example extends React.Component {
         <ClickButton position={{ y: 'center', x: 'right' }} />
         <h2>center center</h2>
         <ClickButton position={{ y: 'center', x: 'center' }} />
+
+        <h2>constrainTo 'scrollParent'</h2>
+        <h3>scroll x:</h3>
+        <div style={{ overflow: 'scroll', border: '1px solid black' }}>
+          <div className='scroll-x'>
+            <span style={{ marginRight: 200 }}>
+              <ClickButton constrainTo='scrollParent' constrainX />
+            </span>
+          </div>
+        </div>
+        <h3>scroll x:</h3>
+        <div style={{ overflow: 'scroll', border: '1px solid black' }}>
+          <div className='scroll-x'>
+            <span style={{ marginLeft: 400 }}>
+              <ClickButton constrainTo='scrollParent' constrainX />
+            </span>
+          </div>
+        </div>
+        <h3>scroll y:</h3>
+        <div style={{ overflow: 'scroll', border: '1px solid black', height: '6em' }}>
+          <div className='scroll-y'>
+            <div style={{ marginBottom: 200 }}>
+              <ClickButton constrainTo='scrollParent' constrainY />
+            </div>
+          </div>
+        </div>
+        <h3>scroll y:</h3>
+        <div style={{ overflow: 'scroll', border: '1px solid black', height: '6em' }}>
+          <div className='scroll-y'>
+            <div style={{ marginTop: 400 }}>
+              <ClickButton constrainTo='scrollParent' constrainY />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

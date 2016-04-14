@@ -33,6 +33,7 @@ function _inherits(subClass, superClass) {
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var scrollparent = require('scrollparent');
 
 var Popover = function (_React$Component) {
   _inherits(Popover, _React$Component);
@@ -49,6 +50,9 @@ var Popover = function (_React$Component) {
   _createClass(Popover, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var domNode = ReactDOM.findDOMNode(this);
+      this.scrollParent = scrollparent(domNode);
+
       this.popover = document.createElement('div');
       this.popover.className = '_Popover';
       this._detachedContainer = document.createElement('div');
@@ -64,6 +68,9 @@ var Popover = function (_React$Component) {
 
       if (this.props.open) {
         window.addEventListener('resize', this.onResize);
+        if (this.scrollParent) {
+          this.scrollParent.addEventListener('scroll', this.onResize);
+        }
       }
     }
   }, {
@@ -72,11 +79,17 @@ var Popover = function (_React$Component) {
       // if we are now opening the popover
       if (!this.props.open && props.open) {
         window.addEventListener('resize', this.onResize);
+        if (this.scrollParent) {
+          this.scrollParent.addEventListener('scroll', this.onResize);
+        }
       }
 
       // if we are now hiding the popover
       if (this.props.open && !props.open) {
         window.removeEventListener('resize', this.onResize);
+        if (this.scrollParent) {
+          this.scrollParent.removeEventListener('scroll', this.onResize);
+        }
       }
     }
   }, {
@@ -88,6 +101,9 @@ var Popover = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       window.removeEventListener('resize', this.onResize);
+      if (this.scrollParent) {
+        this.scrollParent.removeEventListener('scroll', this.onResize);
+      }
       if (this.popover.parentNode !== document.body) return;
       ReactDOM.unmountComponentAtNode(this.popover);
       document.body.removeChild(this.popover);
@@ -117,7 +133,12 @@ var Popover = function (_React$Component) {
   }, {
     key: 'getAnchorBounds',
     value: function getAnchorBounds() {
-      var bounds = this.anchor.getBoundingClientRect();
+      return this.getBounds(this.anchor);
+    }
+  }, {
+    key: 'getBounds',
+    value: function getBounds(domNode) {
+      var bounds = domNode.getBoundingClientRect();
       var viewport = this.getViewportBounds();
 
       var a = {
@@ -167,6 +188,11 @@ var Popover = function (_React$Component) {
   }, {
     key: 'calculatePositionValues',
     value: function calculatePositionValues(position) {
+      var _props = this.props;
+      var constrainTo = _props.constrainTo;
+      var constrainX = _props.constrainX;
+      var constrainY = _props.constrainY;
+
       var docbounds = this.getViewportBounds();
       var bounds = this.getAnchorBounds();
       var body = this.getBodySize();
@@ -194,6 +220,21 @@ var Popover = function (_React$Component) {
 
       if (values.left + body.width > docbounds.right) {
         values.left = docbounds.right - body.width;
+      }
+
+      if (constrainTo === 'scrollParent') {
+        var scrollBounds = this.getBounds(this.scrollParent);
+        if (constrainX && values.left < scrollBounds.left) {
+          values.left = scrollBounds.left;
+        } else if (constrainX && values.left + body.width > scrollBounds.right) {
+          values.left = scrollBounds.right - body.width;
+        }
+
+        if (constrainY && values.top < scrollBounds.top) {
+          values.top = scrollBounds.top;
+        } else if (constrainY && values.top + body.height > scrollBounds.bottom) {
+          values.top = scrollBounds.bottom - body.height;
+        }
       }
 
       return values;
@@ -241,6 +282,9 @@ Popover.propTypes = {
   children: React.PropTypes.node,
   around: React.PropTypes.node.isRequired,
   open: React.PropTypes.bool.isRequired,
+  constrainTo: React.PropTypes.string,
+  constrainX: React.PropTypes.bool,
+  constrainY: React.PropTypes.bool,
   position: React.PropTypes.object
 };
 
@@ -252,7 +296,7 @@ function scrollPosition() {
 
 module.exports = Popover;
 
-},{"react":167,"react-dom":31}],2:[function(require,module,exports){
+},{"react":167,"react-dom":31,"scrollparent":168}],2:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -315,7 +359,7 @@ var ClickButton = function (_React$Component) {
 }(React.Component);
 
 ClickButton.propTypes = {
-  preferPosition: React.PropTypes.object.isRequired
+  preferPosition: React.PropTypes.object
 };
 
 var Example = function (_React$Component2) {
@@ -391,7 +435,84 @@ var Example = function (_React$Component2) {
           null,
           'center center'
         ),
-        React.createElement(ClickButton, { position: { y: 'center', x: 'center' } })
+        React.createElement(ClickButton, { position: { y: 'center', x: 'center' } }),
+        React.createElement(
+          'h2',
+          null,
+          'constrainTo \'scrollParent\''
+        ),
+        React.createElement(
+          'h3',
+          null,
+          'scroll x:'
+        ),
+        React.createElement(
+          'div',
+          { style: { overflow: 'scroll', border: '1px solid black' } },
+          React.createElement(
+            'div',
+            { className: 'scroll-x' },
+            React.createElement(
+              'span',
+              { style: { marginRight: 200 } },
+              React.createElement(ClickButton, { constrainTo: 'scrollParent', constrainX: true })
+            )
+          )
+        ),
+        React.createElement(
+          'h3',
+          null,
+          'scroll x:'
+        ),
+        React.createElement(
+          'div',
+          { style: { overflow: 'scroll', border: '1px solid black' } },
+          React.createElement(
+            'div',
+            { className: 'scroll-x' },
+            React.createElement(
+              'span',
+              { style: { marginLeft: 400 } },
+              React.createElement(ClickButton, { constrainTo: 'scrollParent', constrainX: true })
+            )
+          )
+        ),
+        React.createElement(
+          'h3',
+          null,
+          'scroll y:'
+        ),
+        React.createElement(
+          'div',
+          { style: { overflow: 'scroll', border: '1px solid black', height: '6em' } },
+          React.createElement(
+            'div',
+            { className: 'scroll-y' },
+            React.createElement(
+              'div',
+              { style: { marginBottom: 200 } },
+              React.createElement(ClickButton, { constrainTo: 'scrollParent', constrainY: true })
+            )
+          )
+        ),
+        React.createElement(
+          'h3',
+          null,
+          'scroll y:'
+        ),
+        React.createElement(
+          'div',
+          { style: { overflow: 'scroll', border: '1px solid black', height: '6em' } },
+          React.createElement(
+            'div',
+            { className: 'scroll-y' },
+            React.createElement(
+              'div',
+              { style: { marginTop: 400 } },
+              React.createElement(ClickButton, { constrainTo: 'scrollParent', constrainY: true })
+            )
+          )
+        )
       );
     }
   }]);
@@ -19764,4 +19885,48 @@ module.exports = validateDOMNesting;
 
 module.exports = require('./lib/React');
 
-},{"./lib/React":55}]},{},[2]);
+},{"./lib/React":55}],168:[function(require,module,exports){
+;(function () {
+  var parents = function (node, ps) {
+    if (node.parentNode === null) { return ps; }
+
+    return parents(node.parentNode, ps.concat([node]));
+  };
+
+  var style = function (node, prop) {
+    return getComputedStyle(node, null).getPropertyValue(prop);
+  };
+
+  var overflow = function (node) {
+    return style(node, "overflow") + style(node, "overflow-y") + style(node, "overflow-x");
+  };
+
+  var scroll = function (node) {
+   return (/(auto|scroll)/).test(overflow(node));
+  };
+
+  var scrollParent = function (node) {
+    if (!(node instanceof HTMLElement)) {
+      return ;
+    }
+
+    var ps = parents(node.parentNode, []);
+
+    for (var i = 0; i < ps.length; i += 1) {
+      if (scroll(ps[i])) {
+        return ps[i];
+      }
+    }
+
+    return document.body;
+  };
+
+  // If common js is defined use it.
+  if (typeof module === "object" && module !== null) {
+    module.exports = scrollParent;
+  } else {
+    window.Scrollparent = scrollParent;
+  }
+})();
+
+},{}]},{},[2]);

@@ -2,6 +2,7 @@
 
 const React = require('react')
 const ReactDOM = require('react-dom')
+const scrollparent = require('scrollparent')
 
 class Popover extends React.Component {
   static propTypes = {
@@ -9,6 +10,9 @@ class Popover extends React.Component {
     children: React.PropTypes.node,
     around: React.PropTypes.node.isRequired,
     open: React.PropTypes.bool.isRequired,
+    constrainTo: React.PropTypes.string,
+    constrainX: React.PropTypes.bool,
+    constrainY: React.PropTypes.bool,
     position: React.PropTypes.object
   }
 
@@ -18,6 +22,9 @@ class Popover extends React.Component {
   }
 
   componentDidMount () {
+    const domNode = ReactDOM.findDOMNode(this)
+    this.scrollParent = scrollparent(domNode)
+
     this.popover = document.createElement('div')
     this.popover.className = '_Popover'
     this._detachedContainer = document.createElement('div')
@@ -34,6 +41,9 @@ class Popover extends React.Component {
 
     if (this.props.open) {
       window.addEventListener('resize', this.onResize)
+      if (this.scrollParent) {
+        this.scrollParent.addEventListener('scroll', this.onResize)
+      }
     }
   }
 
@@ -41,11 +51,17 @@ class Popover extends React.Component {
     // if we are now opening the popover
     if (!this.props.open && props.open) {
       window.addEventListener('resize', this.onResize)
+      if (this.scrollParent) {
+        this.scrollParent.addEventListener('scroll', this.onResize)
+      }
     }
 
     // if we are now hiding the popover
     if (this.props.open && !props.open) {
       window.removeEventListener('resize', this.onResize)
+      if (this.scrollParent) {
+        this.scrollParent.removeEventListener('scroll', this.onResize)
+      }
     }
   }
 
@@ -55,6 +71,9 @@ class Popover extends React.Component {
 
   componentWillUnmount () {
     window.removeEventListener('resize', this.onResize)
+    if (this.scrollParent) {
+      this.scrollParent.removeEventListener('scroll', this.onResize)
+    }
     if (this.popover.parentNode !== document.body) return
     ReactDOM.unmountComponentAtNode(this.popover)
     document.body.removeChild(this.popover)
@@ -77,7 +96,11 @@ class Popover extends React.Component {
   }
 
   getAnchorBounds () {
-    const bounds = this.anchor.getBoundingClientRect()
+    return this.getBounds(this.anchor)
+  }
+
+  getBounds (domNode) {
+    const bounds = domNode.getBoundingClientRect()
     const viewport = this.getViewportBounds()
 
     const a = {
@@ -124,6 +147,7 @@ class Popover extends React.Component {
   }
 
   calculatePositionValues (position) {
+    const { constrainTo, constrainX, constrainY } = this.props
     const docbounds = this.getViewportBounds()
     const bounds = this.getAnchorBounds()
     const body = this.getBodySize()
@@ -151,6 +175,21 @@ class Popover extends React.Component {
 
     if (values.left + body.width > docbounds.right) {
       values.left = docbounds.right - body.width
+    }
+
+    if (constrainTo === 'scrollParent') {
+      const scrollBounds = this.getBounds(this.scrollParent)
+      if (constrainX && values.left < scrollBounds.left) {
+        values.left = scrollBounds.left
+      } else if (constrainX && values.left + body.width > scrollBounds.right) {
+        values.left = scrollBounds.right - body.width
+      }
+
+      if (constrainY && values.top < scrollBounds.top) {
+        values.top = scrollBounds.top
+      } else if (constrainY && values.top + body.height > scrollBounds.bottom) {
+        values.top = scrollBounds.bottom - body.height
+      }
     }
 
     return values

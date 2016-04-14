@@ -9,7 +9,6 @@ Unopinionated and unstyled popover component for React. [View example](https://c
 * Simple API
 * Automatic positioning
 * Renders popovers on page body, so it **works inside containers with `overflow: hidden`**
-* No dependencies
 
 ## Installation
 
@@ -52,6 +51,10 @@ The React component against which the popover is positioned.
 #### position (`{ y: 'top'|'bottom'|'center', x: 'left'|'right'|'center' }`)
 
 Manually set the position of the popover.
+
+#### constrainTo: 'scrollParent'
+
+Make sure the tooltip stays within the bounds of its scroll parent. To constrain `x` and `y`, set `constrainX (bool)` and `constrainY (bool)` props.
 
 ### Styling
 
