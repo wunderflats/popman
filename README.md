@@ -38,7 +38,10 @@ Show/hide the popover.
 
 #### className (`string`)
 
-Custom class name for your popover.
+Custom base class name for your popover. Defaults to `Popman`. popman adds the following css class to the container of the popover (`Popman` is replaced by your own `className` if you specified it):
+
+* `.Popman`
+* `.Popman--position-${y}-${x}` (`.Popman--position-top-left` | `.Popman--position-top-right` | `.Popman--position-top-center` | `.Popman--position-bottom-left` | `.Popman--position-bottom-right` | `.Popman--position-bottom-center` | `.Popman--position-center-left` | `.Popman--position-center-right` | `.Popman--position-center-center`)
 
 #### children (`node`)
 
@@ -68,12 +71,14 @@ To give your popovers padding, a white background and a box shadow. Also give so
 }
 
 .Popover--position-bottom-left,
-.Popover--position-bottom-right {
+.Popover--position-bottom-right,
+.Popover--position-bottom-center {
   margin-top: .25rem;
 }
 
 .Popover--position-top-left,
-.Popover--position-top-right {
+.Popover--position-top-right,
+.Popover--position-top-center {
   margin-top: -.25rem;
 }
 ```
