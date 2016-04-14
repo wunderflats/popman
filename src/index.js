@@ -125,17 +125,10 @@ class Popover extends React.Component {
     const rect = this.getAnchorBounds()
     const body = this.getBodySize()
 
-    if (this.props.position) return this.props.position
-
-    const position = { x: 'left', y: 'bottom' }
-
-    if (rect.bottom + body.height >= docbounds.bottom) {
-      position.y = 'top'
-    }
-
-    if (rect.right + body.width >= docbounds.right) {
-      position.x = 'right'
-    }
+    const position = Object.assign({
+      x: calculateXPosition(),
+      y: calculateYPosition()
+    }, this.props.position || {})
 
     const values = this.calculatePositionValues(position)
 
@@ -144,6 +137,22 @@ class Popover extends React.Component {
     }
 
     return position
+
+    function calculateXPosition () {
+      if (rect.right + body.width >= docbounds.right) {
+        return 'right'
+      }
+
+      return 'left'
+    }
+
+    function calculateYPosition () {
+      if (rect.bottom + body.height >= docbounds.bottom) {
+        return 'top'
+      }
+
+      return 'bottom'
+    }
   }
 
   calculatePositionValues (position) {
