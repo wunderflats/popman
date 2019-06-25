@@ -1,6 +1,6 @@
 {
   "name": "popman",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "Popover component for React",
   "main": "dist/index.js",
   "scripts": {
