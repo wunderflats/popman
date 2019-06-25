@@ -57,6 +57,6 @@
   },
   "dependencies": {
     "@babel/cli": "^7.4.4",
-    "scrollparent": "^1.0.0"
+    "scrollparent": "^2.0.1"
   }
 }

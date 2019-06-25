@@ -287,19 +287,19 @@ function scrollPosition() {
 module.exports = Popover;
 
 },{"prop-types":8,"react":18,"react-dom":12,"scrollparent":25}],2:[function(require,module,exports){
-'use strict';
+"use strict";
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-const React = require('react');
+const React = require("react");
 
-const ReactDOM = require('react-dom');
+const ReactDOM = require("react-dom");
 
-const PropTypes = require('prop-types');
+const PropTypes = require("prop-types");
 
-const Popover = require('../dist');
+const Popover = require("../dist");
 
 class ClickButton extends React.Component {
   constructor() {
@@ -322,7 +322,7 @@ class ClickButton extends React.Component {
     } = this.state;
     const body = React.createElement("button", {
       onClick: this.toggle
-    }, open ? 'hide' : 'show');
+    }, open ? "hide" : "show");
     return React.createElement(Popover, _extends({}, this.props, {
       open: open,
       around: body
@@ -339,53 +339,53 @@ class Example extends React.Component {
   render() {
     return React.createElement("div", null, React.createElement("h1", null, "Popover"), React.createElement("h2", null, "top left"), React.createElement(ClickButton, {
       position: {
-        y: 'top',
-        x: 'left'
+        y: "top",
+        x: "left"
       }
     }), React.createElement("h2", null, "top right"), React.createElement(ClickButton, {
       position: {
-        y: 'top',
-        x: 'right'
+        y: "top",
+        x: "right"
       }
     }), React.createElement("h2", null, "top center"), React.createElement(ClickButton, {
       position: {
-        y: 'top',
-        x: 'center'
+        y: "top",
+        x: "center"
       }
     }), React.createElement("h2", null, "bottom left"), React.createElement(ClickButton, {
       position: {
-        y: 'bottom',
-        x: 'left'
+        y: "bottom",
+        x: "left"
       }
     }), React.createElement("h2", null, "bottom right"), React.createElement(ClickButton, {
       position: {
-        y: 'bottom',
-        x: 'right'
+        y: "bottom",
+        x: "right"
       }
     }), React.createElement("h2", null, "bottom center"), React.createElement(ClickButton, {
       position: {
-        y: 'bottom',
-        x: 'center'
+        y: "bottom",
+        x: "center"
       }
     }), React.createElement("h2", null, "center left"), React.createElement(ClickButton, {
       position: {
-        y: 'center',
-        x: 'left'
+        y: "center",
+        x: "left"
       }
     }), React.createElement("h2", null, "center right"), React.createElement(ClickButton, {
       position: {
-        y: 'center',
-        x: 'right'
+        y: "center",
+        x: "right"
       }
     }), React.createElement("h2", null, "center center"), React.createElement(ClickButton, {
       position: {
-        y: 'center',
-        x: 'center'
+        y: "center",
+        x: "center"
       }
     }), React.createElement("h2", null, "constrainTo 'scrollParent'"), React.createElement("h3", null, "scroll x:"), React.createElement("div", {
       style: {
-        overflow: 'scroll',
-        border: '1px solid black'
+        overflow: "scroll",
+        border: "1px solid black"
       }
     }, React.createElement("div", {
       className: "scroll-x"
@@ -398,8 +398,8 @@ class Example extends React.Component {
       constrainX: true
     })))), React.createElement("h3", null, "scroll x:"), React.createElement("div", {
       style: {
-        overflow: 'scroll',
-        border: '1px solid black'
+        overflow: "scroll",
+        border: "1px solid black"
       }
     }, React.createElement("div", {
       className: "scroll-x"
@@ -412,9 +412,9 @@ class Example extends React.Component {
       constrainX: true
     })))), React.createElement("h3", null, "scroll y:"), React.createElement("div", {
       style: {
-        overflow: 'scroll',
-        border: '1px solid black',
-        height: '6em'
+        overflow: "scroll",
+        border: "1px solid black",
+        height: "6em"
       }
     }, React.createElement("div", {
       className: "scroll-y"
@@ -427,9 +427,9 @@ class Example extends React.Component {
       constrainY: true
     })))), React.createElement("h3", null, "scroll y:"), React.createElement("div", {
       style: {
-        overflow: 'scroll',
-        border: '1px solid black',
-        height: '6em'
+        overflow: "scroll",
+        border: "1px solid black",
+        height: "6em"
       }
     }, React.createElement("div", {
       className: "scroll-y"
@@ -445,7 +445,7 @@ class Example extends React.Component {
 
 }
 
-ReactDOM.render(React.createElement(Example, null), document.querySelector('#root'));
+ReactDOM.render(React.createElement(Example, null), document.querySelector("#root"));
 
 },{"../dist":1,"prop-types":8,"react":18,"react-dom":12}],3:[function(require,module,exports){
 /*
@@ -26558,7 +26558,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }
 
-    return document.body;
+    return document.scrollingElement || document.documentElement;
   };
 
   return scrollParent;
