@@ -6,11 +6,7 @@
     "es6": true
   },
   "extends": ["eslint:recommended", "prettier"],
-  "plugins": [
-    "react",
-    "prettier",
-    "react-hooks",
-  ],
+  "plugins": ["react", "prettier", "react-hooks"],
   "globals": { "Cypress": true, "cy": true },
   "parserOptions": {
     "sourceType": "module",
@@ -78,6 +74,6 @@
     "react/jsx-no-undef": "error",
     "react/prop-types": ["error"],
     "react-hooks/rules-of-hooks": "error",
-    "react/no-unused-prop-types": ["error"],
+    "react/no-unused-prop-types": ["error"]
   }
 }
