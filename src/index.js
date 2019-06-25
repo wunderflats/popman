@@ -2,18 +2,19 @@
 
 const React = require("react");
 const ReactDOM = require("react-dom");
+const PropTypes = require("prop-types");
 const scrollparent = require("scrollparent");
 
 class Popover extends React.Component {
   static propTypes = {
-    className: React.PropTypes.string,
-    children: React.PropTypes.node,
-    around: React.PropTypes.node.isRequired,
-    open: React.PropTypes.bool.isRequired,
-    constrainTo: React.PropTypes.string,
-    constrainX: React.PropTypes.bool,
-    constrainY: React.PropTypes.bool,
-    position: React.PropTypes.object
+    className: PropTypes.string,
+    children: PropTypes.node,
+    around: PropTypes.node.isRequired,
+    open: PropTypes.bool.isRequired,
+    constrainTo: PropTypes.string,
+    constrainX: PropTypes.bool,
+    constrainY: PropTypes.bool,
+    position: PropTypes.object
   };
 
   constructor() {

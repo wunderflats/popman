@@ -79,6 +79,5 @@
     "react/prop-types": ["error"],
     "react-hooks/rules-of-hooks": "error",
     "react/no-unused-prop-types": ["error"],
-    "react/jsx-no-literals": ["error"]
   }
 }

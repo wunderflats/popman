@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/wunderflats/popman#readme",
   "peerDependencies": {
+    "prop-types": "^15.7.2",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
   },
@@ -50,8 +51,9 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "mkdirp": "^0.5.1",
     "prettier": "^1.18.2",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "dependencies": {
     "@babel/cli": "^7.4.4",
