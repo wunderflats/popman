@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "mkdirp dist && babel src/index.js -o dist/index.js",
+    "watch": "mkdirp dist && babel src/index.js -w -o dist/index.js",
     "build:examples": "browserify -t babelify examples/index.js -o examples/bundle.js",
     "build:all": "npm run build && npm run build:examples",
     "test": "echo \"No tests specified\"",
