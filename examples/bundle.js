@@ -115,6 +115,10 @@ class Popover extends React.Component {
     return this.getBounds(this.anchor);
   }
 
+  getBodyBounds() {
+    return this.getBounds(this._detachedContainer);
+  }
+
   getBounds(domNode) {
     const bounds = domNode.getBoundingClientRect();
     const viewport = this.getViewportBounds();
@@ -136,8 +140,8 @@ class Popover extends React.Component {
 
   calculatePosition() {
     const docbounds = this.getViewportBounds();
-    const rect = this.getAnchorBounds();
-    const body = this.getBodySize();
+    const anchorBounds = this.getAnchorBounds();
+    const bodySize = this.getBodySize();
     const position = Object.assign({
       x: calculateXPosition(),
       y: calculateYPosition()
@@ -151,15 +155,15 @@ class Popover extends React.Component {
     return position;
 
     function calculateXPosition() {
-      if (rect.right + body.width >= docbounds.right) {
-        return "right";
+      if (anchorBounds.right + bodySize.width >= docbounds.right) {
+        return "left";
       }
 
-      return "left";
+      return "right";
     }
 
     function calculateYPosition() {
-      if (rect.bottom + body.height >= docbounds.bottom) {
+      if (anchorBounds.bottom + bodySize.height >= docbounds.bottom) {
         return "top";
       }
 
@@ -174,32 +178,32 @@ class Popover extends React.Component {
       constrainY
     } = this.props;
     const docbounds = this.getViewportBounds();
-    const bounds = this.getAnchorBounds();
-    const body = this.getBodySize();
+    const anchorBounds = this.getAnchorBounds();
+    const bodySize = this.getBodySize();
     const values = {};
 
     if (position.y === "bottom") {
-      values.top = bounds.bottom;
+      values.top = anchorBounds.bottom;
     } else if (position.y === "center") {
-      const anchorHeight = bounds.bottom - bounds.top;
-      const anchorCenter = bounds.top + anchorHeight / 2;
-      values.top = anchorCenter - body.height / 2;
+      const anchorHeight = anchorBounds.bottom - anchorBounds.top;
+      const anchorCenter = anchorBounds.top + anchorHeight / 2;
+      values.top = anchorCenter - bodySize.height / 2;
     } else {
-      values.top = bounds.top - body.height;
+      values.top = anchorBounds.top - bodySize.height;
     }
 
     if (position.x === "left") {
-      values.left = bounds.left;
+      values.left = anchorBounds.left - bodySize.width;
     } else if (position.x === "center") {
-      const anchorWidth = bounds.right - bounds.left;
-      const anchorCenter = bounds.left + anchorWidth / 2;
-      values.left = anchorCenter - body.width / 2;
+      const anchorWidth = anchorBounds.right - anchorBounds.left;
+      const anchorCenter = anchorBounds.left + anchorWidth / 2;
+      values.left = anchorCenter - bodySize.width / 2;
     } else {
-      values.left = bounds.right - body.width;
+      values.left = anchorBounds.right;
     }
 
-    if (values.left + body.width > docbounds.right) {
-      values.left = docbounds.right - body.width;
+    if (values.left + bodySize.width > docbounds.right) {
+      values.left = docbounds.right - bodySize.width;
     }
 
     if (constrainTo === "scrollParent") {
@@ -207,14 +211,14 @@ class Popover extends React.Component {
 
       if (constrainX && values.left < scrollBounds.left) {
         values.left = scrollBounds.left;
-      } else if (constrainX && values.left + body.width > scrollBounds.right) {
-        values.left = scrollBounds.right - body.width;
+      } else if (constrainX && values.left + bodySize.width > scrollBounds.right) {
+        values.left = scrollBounds.right - bodySize.width;
       }
 
       if (constrainY && values.top < scrollBounds.top) {
         values.top = scrollBounds.top;
-      } else if (constrainY && values.top + body.height > scrollBounds.bottom) {
-        values.top = scrollBounds.bottom - body.height;
+      } else if (constrainY && values.top + bodySize.height > scrollBounds.bottom) {
+        values.top = scrollBounds.bottom - bodySize.height;
       }
     }
 
