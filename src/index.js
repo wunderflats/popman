@@ -246,7 +246,7 @@ class Popover extends React.Component {
     }
 
     ReactDOM.render(
-      <div style={style} className={className}>
+      <div style={style} className={`${className} ${baseClassName}--open`}>
         {this.props.children}
       </div>,
       this.popover
